@@ -12,7 +12,7 @@ import TextField from '@mui/material/TextField'
 
 import useStyles from './styles'
 
-const Register = () => {
+const Login = () => {
 
     const classes = useStyles()
 
@@ -23,25 +23,10 @@ const Register = () => {
                     <CardContent>
                         <div className={classes.header}>
                             <Typography component="h1" variant="h5">
-                                Sign up
+                                Sign In
                             </Typography>
                         </div>
                         <form>
-                            <TextField
-                                margin="dense"
-                                autoComplete="name"
-                                name="name"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="name"
-                                label="Name"
-                                autoFocus
-                                onChange={
-                                    (e) => {
-                                    }
-                                }
-                            />
                             <TextField
                                 margin="dense"
                                 variant="outlined"
@@ -75,8 +60,8 @@ const Register = () => {
                         </form>
                     </CardContent>
                     <CardActions>
-                        <Link to="/login">Already have an account?</Link>
-                        {/* <Button size="small">Already have an account?</Button> */}
+                        <Link to="/register">Don't have an account?</Link>
+                        {/* <Button size="small">Don't have an account?</Button> */}
                     </CardActions>
                 </Card>
             </Paper>
@@ -84,4 +69,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default Login

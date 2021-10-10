@@ -5,8 +5,9 @@ export default makeStyles((theme) => ({
         height: '100vh',
         width: 'auto',
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
+        alignItems: 'center',
+        // paddingTop: 180,
         backgroundColor: '#e2e2e2',
     },
     header: {
@@ -17,5 +18,9 @@ export default makeStyles((theme) => ({
     },
     form_input: {
         marginBottom: 12,
+    },
+    paper: {
+        width: 960,
+        // height: 420,
     }
 }))
