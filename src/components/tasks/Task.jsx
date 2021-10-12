@@ -1,48 +1,56 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import Divider from '@mui/material/Divider'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-import Avatar from '@mui/material/Avatar'
-import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
+import { Pagination, Typography } from '@mui/material'
 
 import useStyles from './styles'
+
 import TaskInformation from './task_information/TaskInformation'
+
+import TaskService from '../../services/TaskService'
 
 const Task = () => {
 
     const classes = useStyles()
 
+    const [tasks, setTasks] = useState([])
+    const [page, setPage] = useState(1)
+    const [count, setCount] = useState(0)
+    const [pageSize, setPageSize] = useState(3)
+
+    useEffect(() => {
+        TaskService.tasks()
+            .then((response) => {
+                console.log(response)
+                if (response.data.status === 0) {
+                    console.log("status found")
+                    if (response.data.data) {
+                        console.log(response.data.data.tasks.data)
+                        setTasks(response.data.data.tasks.data)
+                    }
+                }
+            })
+            .catch((err) => {
+                console.log("error occurred")
+                console.log(err)
+            })
+    }, [])
+
     return (
         <div className={classes.main}>
             <Paper elevation={3} className={classes.paper}>
                 <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                    <ListItem alignItems="flex-start">
-                        {/* <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                        </ListItemAvatar> */}
-                        {/* <ListItemText
-                            primary=""
-                            secondary={
-                                <React.Fragment>
-                                    <Typography
-                                        sx={{ display: 'inline' }}
-                                        component="span"
-                                        variant="body2"
-                                        color="text.primary"
-                                    >
-                                        Ali Connors
-                                    </Typography>
-                                    {" — I'll be in your neighborhood doing errands this…"}
-                                </React.Fragment>
-                            }
-                        /> */}
-                        <TaskInformation />
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
+                    {tasks.map((task, index) =>
+                        <>
+                            <ListItem alignItems="flex-start">
+                                <TaskInformation task={ task }  />
+                            </ListItem>
+                            <Divider variant="inset" component="li" />
+                        </>
+                    )}
                 </List>
             </Paper>
         </div>

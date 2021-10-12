@@ -4,7 +4,7 @@ import { Typography, Checkbox, FormGroup, FormControlLabel, Button } from '@mui/
 
 import useStyles from './styles'
 
-const TaskInformation = () => {
+const TaskInformation = ({ task }) => {
 
     const classes = useStyles()
 
@@ -13,7 +13,7 @@ const TaskInformation = () => {
             <div className={classes.task}>
                 <div className={classes.task_actions}>
                     <Typography variant="h4" component="h4">
-                        Task 1
+                        { task.task }
                     </Typography>
                     <FormGroup>
                         <FormControlLabel control={<Checkbox />} label="Completed" />

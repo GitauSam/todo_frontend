@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = false
 const API_URL = 'http://localhost:8800/api/v1/'
 
 class AuthService {
@@ -9,13 +9,29 @@ class AuthService {
             .post(API_URL + 'login', {
                 email,
                 password
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },      
             })
             .then(response => {
-                console.log(response)
+                console.log(response.data)
+
+                if (response.data.status === 0) {
+                    localStorage.setItem('user', JSON.stringify(response.data))
+                }
+            })
+    }
+
+    register(name, email, password) {
+        return axios
+            .post(API_URL + 'register', {
+                name,
+                email,
+                password
+            })
+            .then(response => {
+                console.log(response.data)
+
+                if (response.data.status === 0) {
+                    localStorage.setItem('user', JSON.stringify(response.data))
+                }
             })
     }
 }

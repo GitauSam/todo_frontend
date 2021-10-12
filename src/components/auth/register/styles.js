@@ -17,5 +17,11 @@ export default makeStyles((theme) => ({
     },
     form_input: {
         marginBottom: 12,
+    },
+    form_btn: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        paddingTop: 12,
     }
 }))
