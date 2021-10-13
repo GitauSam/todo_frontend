@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import authHeader from './auth-header'
+
 axios.defaults.withCredentials = false
 const API_URL = 'http://localhost:8800/api/v1/'
 
@@ -33,6 +35,10 @@ class AuthService {
                     localStorage.setItem('user', JSON.stringify(response.data))
                 }
             })
+    }
+
+    logout() {
+        return axios.get(API_URL + 'logout', { headers:  authHeader()})
     }
 }
 

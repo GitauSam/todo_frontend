@@ -16,6 +16,8 @@ import { blue } from '@mui/material/colors'
 
 import { useHistory } from 'react-router'
 
+import Nav from '../../common/appbar/Nav'
+
 import AuthService from '../../../services/AuthService'
 
 import useStyles from './styles'
@@ -83,85 +85,88 @@ const Login = () => {
     }
 
     return (
-        <div className={classes.main}>
-            <Paper elevation={3}>
-                <Card sx={{ minWidth: 275 }} variant="outlined">
-                    <CardContent>
-                        <div className={classes.header}>
-                            <Typography component="h1" variant="h5">
-                                Sign In
-                            </Typography>
-                        </div>
-                        <form>
-                            <TextField
-                                margin="dense"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                onChange={
-                                    (e) => {
-                                        setEmail(e.target.value)
-                                    }
-                                }
-
-                            />
-                            <TextField
-                                margin="dense"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                onChange={
-                                    (e) => {
-                                        setPassword(e.target.value)
-                                    }
-                                }
-                            />
-                            <div className={classes.form_btn}>
-                                <Box sx={{ m: 1, position: 'relative' }}>
-                                    <Button
-                                        variant="contained"
-                                        sx={buttonSx}
-                                        disabled={loading}
-                                        onClick={
-                                            (e) => {
-                                                login(email, password)
-                                            }
-                                        }
-                                    >
-                                        Log In
-                                    </Button>
-                                    {loading && (
-                                        <CircularProgress
-                                            size={24}
-                                            sx={{
-                                                color: blue[500],
-                                                position: 'absolute',
-                                                top: '50%',
-                                                left: '50%',
-                                                marginTop: '-12px',
-                                                marginLeft: '-12px',
-                                            }}
-                                        />
-                                    )}
-                                </Box>
+        <>
+            <Nav auth={false}/>
+            <div className={classes.main}>
+                <Paper elevation={3}>
+                    <Card sx={{ minWidth: 275 }} variant="outlined">
+                        <CardContent>
+                            <div className={classes.header}>
+                                <Typography component="h1" variant="h5">
+                                    Sign In
+                                </Typography>
                             </div>
-                        </form>
-                    </CardContent>
-                    <CardActions>
-                        <Link to="/register">Don't have an account?</Link>
-                    </CardActions>
-                </Card>
-            </Paper>
-        </div>
+                            <form>
+                                <TextField
+                                    margin="dense"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    name="email"
+                                    autoComplete="email"
+                                    onChange={
+                                        (e) => {
+                                            setEmail(e.target.value)
+                                        }
+                                    }
+
+                                />
+                                <TextField
+                                    margin="dense"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                    onChange={
+                                        (e) => {
+                                            setPassword(e.target.value)
+                                        }
+                                    }
+                                />
+                                <div className={classes.form_btn}>
+                                    <Box sx={{ m: 1, position: 'relative' }}>
+                                        <Button
+                                            variant="contained"
+                                            sx={buttonSx}
+                                            disabled={loading}
+                                            onClick={
+                                                (e) => {
+                                                    login(email, password)
+                                                }
+                                            }
+                                        >
+                                            Log In
+                                        </Button>
+                                        {loading && (
+                                            <CircularProgress
+                                                size={24}
+                                                sx={{
+                                                    color: blue[500],
+                                                    position: 'absolute',
+                                                    top: '50%',
+                                                    left: '50%',
+                                                    marginTop: '-12px',
+                                                    marginLeft: '-12px',
+                                                }}
+                                            />
+                                        )}
+                                    </Box>
+                                </div>
+                            </form>
+                        </CardContent>
+                        <CardActions>
+                            <Link to="/register">Don't have an account?</Link>
+                        </CardActions>
+                    </Card>
+                </Paper>
+            </div>
+        </>
     )
 }
 

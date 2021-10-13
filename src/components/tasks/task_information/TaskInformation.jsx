@@ -4,7 +4,7 @@ import { Typography, Checkbox, FormGroup, FormControlLabel, Button } from '@mui/
 
 import useStyles from './styles'
 
-const TaskInformation = ({ task }) => {
+const TaskInformation = ({ task, markComplete, deleteTask }) => {
 
     const classes = useStyles()
 
@@ -16,11 +16,31 @@ const TaskInformation = ({ task }) => {
                         { task.task }
                     </Typography>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox />} label="Completed" />
+                        <FormControlLabel 
+                            control={
+                                <Checkbox 
+                                    checked={false}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                    onClick={() => {
+                                        markComplete(task.id)
+                                    }}
+                                />
+                            } 
+                            label="Completed" 
+                        />
                     </FormGroup>
                 </div>
                 <div className={classes.delete_container}>
-                    <Button variant="outlined" className={classes.delete} color="error">Delete</Button>
+                    <Button 
+                        variant="outlined" 
+                        className={classes.delete} 
+                        color="error"
+                        onClick={() => {
+                            deleteTask(task.id)
+                        }}
+                    >
+                        Delete
+                    </Button>
                 </div>
             </div>
         </div>

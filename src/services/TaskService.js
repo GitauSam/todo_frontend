@@ -9,6 +9,14 @@ class TaskService {
     tasks() {
         return axios.get(API_URL + 'task', { headers: authHeader() })
     }
+
+    markComplete(id) {
+        return axios.get(API_URL + 'task/complete/' + id, { headers: authHeader() })
+    }
+
+    deleteTask(id) {
+        return axios.delete(API_URL + 'task/' + id, { headers: authHeader() })
+    }
 }
 
 export default new TaskService()

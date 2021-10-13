@@ -9,8 +9,10 @@ import { Pagination, Typography } from '@mui/material'
 import useStyles from './styles'
 
 import TaskInformation from './task_information/TaskInformation'
+import Nav from '../common/appbar/Nav'
 
 import TaskService from '../../services/TaskService'
+
 
 const Task = () => {
 
@@ -21,7 +23,7 @@ const Task = () => {
     const [count, setCount] = useState(0)
     const [pageSize, setPageSize] = useState(3)
 
-    useEffect(() => {
+    const fetchTasks = () => {
         TaskService.tasks()
             .then((response) => {
                 console.log(response)
@@ -37,23 +39,64 @@ const Task = () => {
                 console.log("error occurred")
                 console.log(err)
             })
+    }
+
+    const markComplete = (id) => {
+        console.log("mark complete activated")
+
+        TaskService.markComplete(id)
+            .then((response) => {
+                console.log(response)
+                if (response.data.status === 0) {
+                    console.log("marked completed")
+                    fetchTasks()
+                }
+            })
+            .catch((err) => {
+                console.log("error occurred")
+                console.log(err)
+            })
+    }
+
+    const deleteTask = (id) => {
+        console.log("delete task activated")
+
+        TaskService.deleteTask(id)
+            .then((response) => {
+                console.log(response)
+                if (response.data.status === 0) {
+                    console.log("task deletion completed")
+                    fetchTasks()
+                }
+            })
+            .catch((err) => {
+                console.log("error occurred")
+                console.log(err)
+            })
+    }
+
+    useEffect(() => {
+        fetchTasks()
     }, [])
 
     return (
-        <div className={classes.main}>
-            <Paper elevation={3} className={classes.paper}>
-                <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                    {tasks.map((task, index) =>
-                        <>
-                            <ListItem alignItems="flex-start">
-                                <TaskInformation task={ task }  />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                        </>
-                    )}
-                </List>
-            </Paper>
-        </div>
+        <>
+            <Nav auth={true}/>
+            <div className={classes.main}>
+                <Paper elevation={3} className={classes.paper}>
+                    <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+                        {tasks.map((task, index) =>
+                            <>
+                                <ListItem alignItems="flex-start">
+                                    <TaskInformation task={task} markComplete={markComplete} deleteTask={deleteTask} />
+                                </ListItem>
+                                <Divider variant="inset" component="li" />
+                            </>
+                        )}
+                    </List>
+                </Paper>
+            </div>
+        </>
     )
 }
 

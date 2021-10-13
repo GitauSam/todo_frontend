@@ -8,6 +8,7 @@ import {
 import Register from './components/auth/register/Register'
 import Login from './components/auth/login/Login'
 import Task from "./components/tasks/Task";
+import Nav from "./components/common/appbar/Nav";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path="/task">
             <Task />
+          </Route>
+          <Route path="/nav">
+            <Nav />
           </Route>
         </Switch>
       </div>
