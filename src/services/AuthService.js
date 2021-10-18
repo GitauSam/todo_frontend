@@ -28,13 +28,6 @@ class AuthService {
                 email,
                 password
             })
-            .then(response => {
-                console.log(response.data)
-
-                if (response.data.status === 0) {
-                    localStorage.setItem('user', JSON.stringify(response.data))
-                }
-            })
     }
 
     logout() {
