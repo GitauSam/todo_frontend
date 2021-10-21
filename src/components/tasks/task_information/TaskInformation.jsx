@@ -3,6 +3,7 @@ import React from 'react'
 import { Typography, Checkbox, FormGroup, FormControlLabel, Button } from '@mui/material'
 
 import useStyles from './styles'
+import TaskInformationComplete from './task_information_complete/TaskInformationComplete'
 
 const TaskInformation = ({ task, markComplete, deleteTask }) => {
 
@@ -18,12 +19,9 @@ const TaskInformation = ({ task, markComplete, deleteTask }) => {
                     <FormGroup>
                         <FormControlLabel 
                             control={
-                                <Checkbox 
-                                    checked={false}
-                                    inputProps={{ 'aria-label': 'controlled' }}
-                                    onClick={() => {
-                                        markComplete(task.id)
-                                    }}
+                                <TaskInformationComplete 
+                                    task={task} 
+                                    markComplete={markComplete}
                                 />
                             } 
                             label="Completed" 

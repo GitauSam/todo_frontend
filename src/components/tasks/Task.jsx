@@ -80,7 +80,7 @@ const Task = () => {
     }, [])
 
     return (
-        <>
+        <> 
             <Nav auth={true}/>
             <div className={classes.main}>
                 <Paper elevation={3} className={classes.paper}>
@@ -88,7 +88,11 @@ const Task = () => {
                         {tasks.map((task, index) =>
                             <>
                                 <ListItem alignItems="flex-start">
-                                    <TaskInformation task={task} markComplete={markComplete} deleteTask={deleteTask} />
+                                    <TaskInformation 
+                                        task={task} 
+                                        markComplete={markComplete} 
+                                        deleteTask={deleteTask}
+                                    />
                                 </ListItem>
                                 <Divider variant="inset" component="li" />
                             </>
